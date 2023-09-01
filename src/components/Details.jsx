@@ -31,7 +31,7 @@ export const Deatils = () => {
     }
 
 
-    console.log("Sunrise Timestamp Data:", data);
+    // console.log("Sunrise Timestamp Data:", data);
 
 
     return isLoading ? (
@@ -78,7 +78,6 @@ export const Deatils = () => {
                                 <NewText>{formatUnixTimestampToHourMinute(data.sys.sunrise)}</NewText>
                                 <NewText>{formatUnixTimestampToHourMinute(data.sys.sunset)}</NewText>
                                
-                                {/* <NewText>{console.log("Sunrise", sunrise)}</NewText> */}
                                 
                             </Box>
                         </Grid>
