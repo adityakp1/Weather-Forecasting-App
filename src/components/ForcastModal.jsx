@@ -3,12 +3,15 @@ import { dateFormat } from "../helpers/extraFunctions";
 import { NewText } from "./SmallComponents";
 import { ImSun } from "react-icons/im";
 import { MdOutlineNightsStay } from "react-icons/md";
+import { formatUnixTimestampToHourMinute } from "../helpers/Timestamp"
 
 
 export const ForcastModal = ({ data }) => {
 
     const { date, day } = dateFormat(data.dt);
     const { isOpen, onOpen, onClose } = useDisclosure();
+
+    console.log("Forecast Data: ", data);
 
     return (
         <>
@@ -39,7 +42,7 @@ export const ForcastModal = ({ data }) => {
 
                             <Grid templateColumns={'50% 50%'} >
                                 <Box pb={'10px'} pl={'15%'}>
-                                    {['Felt Temp.', 'Humidity', 'Wind', 'Pressure', 'Day Temp.', 'Evening Temp.', 'Night Temp.', 'Max Temp.', 'Min Temp.'].map((e, i) => (
+                                    {['Felt Temp.', 'Humidity', 'Wind', 'Pressure', 'Day Temp.', 'Evening Temp.', 'Night Temp.', 'Max Temp.', 'Min Temp.', 'Sunrise', 'Sunset', 'Moonrise'].map((e, i) => (
                                         <Text key={i} color={'#5e82f4'} fontWeight={500} mt={'15px'} fontSize={'18px'} >{e}</Text>
                                     ))}
                                 </Box>
@@ -53,6 +56,10 @@ export const ForcastModal = ({ data }) => {
                                     <NewText>{data.temp.night}<sup>o</sup> C</NewText>
                                     <NewText>{data.temp.min}<sup>o</sup> C</NewText>
                                     <NewText>{data.temp.max}<sup>o</sup> C</NewText>
+                                    <NewText>{formatUnixTimestampToHourMinute(data.sunrise)}</NewText>
+                                    <NewText>{formatUnixTimestampToHourMinute(data.sunset)}</NewText>
+                                    <NewText>{formatUnixTimestampToHourMinute(data.moonrise)}</NewText>
+
                                 </Box>
                             </Grid>
                         </Box>

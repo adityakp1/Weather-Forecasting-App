@@ -10,6 +10,7 @@ import { Map } from "./Map";
 import { FaSyncAlt } from "react-icons/fa";
 import { Newbox, NewText } from "./SmallComponents";
 import { Forcast } from "./Forcast";
+import { formatUnixTimestampToHourMinute } from "../helpers/Timestamp"
 
 
 export const Deatils = () => {
@@ -18,7 +19,7 @@ export const Deatils = () => {
     const [isRotate, setIsRotate] = useState(false);
     const dispatch = useDispatch();
     const toast = useToast();
-
+    
     useEffect(() => {
         let weather = getItem("weather");
         !weather && dispatch(getWeatherByLocation(toast));
@@ -28,6 +29,10 @@ export const Deatils = () => {
         setIsRotate(true);
         dispatch(syncData(data.name, toast))
     }
+
+
+    console.log("Sunrise Timestamp Data:", data);
+
 
     return isLoading ? (
         <Loading />
@@ -47,26 +52,34 @@ export const Deatils = () => {
                                     cursor={'pointer'} w={'23px'} h={'23px'} as={FaSyncAlt}
                                 />
                             </Flex>
-                            <Heading>{data.name}</Heading>
+                            <Heading>{data.name}, {data.sys.country}</Heading>
                             <Heading fontSize={['100px', '120px', '120px', '100px', '120px']}>{Math.round(data.main.temp - 273)}<sup>o</sup>C</Heading>
                             <Heading>{data.weather[0].main}</Heading>
+                            <Heading>{data.population}</Heading>
                         </Box>
                     </Newbox>
 
                     <Newbox>
                         <Grid templateColumns={'50% 50%'} h={'100%'} p={'8px'}>
                             <Box py={'10px'} pl={'15%'}>
-                                {['Felt Temp.', 'Humidity', 'Wind', 'Visibility', 'Max Temp.', 'Min Temp.'].map((e, i) => (
+                                {['Felt Temp.', 'Humidity', 'Wind', 'Visibility', 'Max Temp.', 'Min Temp.', 'Sunrise', 'Sunset'].map((e, i) => (
                                     <Text key={i} color={'#5e82f4'} fontWeight={500} mt={'15px'} fontSize={'18px'} >{e}</Text>
                                 ))}
                             </Box>
                             <Box borderRadius={'30px'} bg={'#5e82f4'} py={'10px'} pl={'15%'}>
+                            
+ 
                                 <NewText>{celsius(data.main.feels_like)}<sup>o</sup> C</NewText>
                                 <NewText>{data.main.humidity}%</NewText>
                                 <NewText>{(data.wind.speed * 3.6).toFixed(2)} Km/h</NewText>
                                 <NewText>{(data.visibility * 0.001).toFixed(2)} Km</NewText>
                                 <NewText>{celsius(data.main.temp_max)}<sup>o</sup> C</NewText>
                                 <NewText>{celsius(data.main.temp_min)}<sup>o</sup> C</NewText>
+                                <NewText>{formatUnixTimestampToHourMinute(data.sys.sunrise)}</NewText>
+                                <NewText>{formatUnixTimestampToHourMinute(data.sys.sunset)}</NewText>
+                               
+                                {/* <NewText>{console.log("Sunrise", sunrise)}</NewText> */}
+                                
                             </Box>
                         </Grid>
                     </Newbox>

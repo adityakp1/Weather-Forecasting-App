@@ -10,7 +10,7 @@ export const ForcastBox = ({ children }) => {
 
 export const Newbox = ({ children }) => {
     return (
-        <Box className="zoom" overflow={'hidden'} shadow={'0px 0px 30px 6px #E2E2E2'} borderRadius={'30px'} h={'300px'}>
+        <Box className="zoom" overflow={'hidden'} shadow={'0px 0px 30px 6px #E2E2E2'} borderRadius={'30px'} h={'370px'}>
             {children}
         </Box>
     );
