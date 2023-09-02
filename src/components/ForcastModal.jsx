@@ -42,7 +42,7 @@ export const ForcastModal = ({ data }) => {
 
                             <Grid templateColumns={'50% 50%'} >
                                 <Box pb={'10px'} pl={'15%'}>
-                                    {['Felt Temp.', 'Humidity', 'Wind', 'Pressure', 'Day Temp.', 'Evening Temp.', 'Night Temp.', 'Max Temp.', 'Min Temp.', 'Sunrise', 'Sunset', 'Moonrise'].map((e, i) => (
+                                    {['Felt Temp.', 'Humidity', 'Wind', 'Pressure', 'Day Temp.', 'Evening Temp.', 'Night Temp.', 'Min Temp.', 'Max Temp.', 'Sunrise', 'Sunset', 'Moonrise'].map((e, i) => (
                                         <Text key={i} color={'#5e82f4'} fontWeight={500} mt={'15px'} fontSize={'18px'} >{e}</Text>
                                     ))}
                                 </Box>
